@@ -22,6 +22,9 @@ class Player {
         character.forEach { (character) in
             self.characterInLife.append(character)
         }
+        for i in characterInLife {
+            print("PERSONNAGE EN VIE ->", i.name, i.life, i.type, i.weapon)
+        }
     }
     
 }

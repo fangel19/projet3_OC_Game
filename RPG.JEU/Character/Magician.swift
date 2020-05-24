@@ -19,7 +19,7 @@ class Magician: Character {
     //initier la Magician
 
     init(name: String) {
-        super.init(type: "Warrior", name: name, weapon: Drug(), life: 250)
+        super.init(type: "Magician", name: name, weapon: Drug(), life: 250)
     }
     
 }

@@ -10,10 +10,14 @@ import Foundation
 // class Game
 class Game {
     
- 
+    var player1: Player?
+    var player2: Player?
     var numberRound = 0
     
-    
+    init() {
+        
+
+    }
     
     // Creation of the game application
     
@@ -90,8 +94,8 @@ class Game {
             } while check == false
             
         } while tabNamesOfCharacters.count != 3
-                print(tabNamesOfCharacters[0], tabChoiceOfCharacter[0], tabNamesOfCharacters[1], tabChoiceOfCharacter[1], tabChoiceOfCharacter[2], tabNamesOfCharacters[2])
-        
+        print(tabNamesOfCharacters[0], tabChoiceOfCharacter[0].type, tabNamesOfCharacters[1], tabChoiceOfCharacter[1].type, tabChoiceOfCharacter[2].type, tabNamesOfCharacters[2])
+        player1 = Player(character: tabChoiceOfCharacter)
         
 
         //  playerOne = Player(names: [tabNamesOfCharacters[0], tabNamesOfCharacters[1], tabNamesOfCharacters[2]])
@@ -117,7 +121,7 @@ class Game {
         } while tabNamesOfCharacters.count != 6
         print(tabNamesOfCharacters[3], tabChoiceOfCharacter[3], tabNamesOfCharacters[4], tabChoiceOfCharacter[4], tabChoiceOfCharacter[5], tabNamesOfCharacters[5])
          //playerTwo = Player(names: [tabNamesOfCharacters[0], tabNamesOfCharacters[1], tabNamesOfCharacters[2]])
-        
+        player2 = Player(character: tabChoiceOfCharacter)
     }
     
     //
