@@ -10,14 +10,10 @@ import Foundation
 // class Game
 class Game {
     
-    let player1: Player
-    let player2: Player
+ 
     var numberRound = 0
     
-    init() {
-        self.player1 = Player(character: [Character]())
-        self.player2 = Player(character: [Character]())
-    }
+    
     
     // Creation of the game application
     
