@@ -28,9 +28,3 @@ class Player {
     }
     
 }
-
-//    init(names: [String]) {
-//        names.forEach { (name) in
-//            self.characterInLife.append()
-//        }
-//    }

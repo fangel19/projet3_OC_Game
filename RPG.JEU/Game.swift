@@ -96,12 +96,7 @@ class Game {
         } while tabNamesOfCharacters.count != 3
         print(tabNamesOfCharacters[0], tabChoiceOfCharacter[0].type, tabNamesOfCharacters[1], tabChoiceOfCharacter[1].type, tabChoiceOfCharacter[2].type, tabNamesOfCharacters[2])
         player1 = Player(character: tabChoiceOfCharacter)
-        
-
-        //  playerOne = Player(names: [tabNamesOfCharacters[0], tabNamesOfCharacters[1], tabNamesOfCharacters[2]])
-        
-//        print("\nSelect the names of your characters :\n")
-//
+                
         repeat {
             
             print("\n Player 2 -> Choice name of your character  \(tabNamesOfCharacters.count - 2) : ")
@@ -124,23 +119,6 @@ class Game {
         player2 = Player(character: tabChoiceOfCharacter)
     }
     
-    //
-    //
-    //    func selectCharacter(team: [Character]) -> Character {
-    //        var choice = 0
-    //
-    //        for (index, character) in team.enumerated() {
-    //
-    //        }
-    //        repeat {
-    //            choice = Int(readLine())
-    //        } while choice < 1 && choice > team.count {
-    //            return team[choice - 1]
-    //        }
-    //        // Return function selecCharacter.
-    //        return selectCharacter()
-    //    }
-        
     
     
     //reste t-il des joueurs en vie
@@ -162,21 +140,60 @@ class Game {
 //    }
 //
         
+  
+
         
         
+//        the round
+//        if i an attacker and a ennamy
+    func round(attacker: [Player], ennemy: [Player]) {
         
-//        déroulement d'un round
-//        il y a un attacher et un ennemy
-//        func round(attacker: Player, ennemy: Player) {
-//
-//            //on ajoute le coffre
-//            let chest = Chest()
-//
-//            //choisir un personnage dans l'équipe
-//            let attackerCharacter = attacker.team
-//
+        var attackerChoice = player1?.characterInLife
+        var ennemyChoice = player2?.characterInLife
+        
+        while attacker.count != 0 {
+            for (index, attacker) in player1?.characterInLife.enumerated() {
+                print("\(index + 1) - \(attacker.name) with \(attacker.life) pv")
+                
+                if let choiceName = Tools.shared.getInputInt() {
+                    switch choiceName {
+                    case 1 :
+                        print("Your choice attacker is \(tabNamesOfCharacters[0]))")
+                    case 2 :
+                        print("Your choice attacker is \(tabNamesOfCharacters[1]))")
+                    case 3 :
+                        print("Your choice attacker is \(tabNamesOfCharacters[2]))")
+                        
+                    default:
+                        print("You did not choose a character")
+                        
+                    }
+                    
+                }
+            }
+        }
+
+        while ennemy.count < 3 {
+            for (index, ennemy) in player2?.characterInLife.enumerated() {
+                print("\(index + 1) - \(ennemy.name) with \(ennemy.life) pv")
+                
+                if let choiceName = Tools.shared.getInputInt() {
+                    switch choiceName {
+                    case 1 :
+                        print("Your choice attacker is \(tabNamesOfCharacters[3]))")
+                    case 2 :
+                        print("Your choice attacker is \(tabNamesOfCharacters[4]))")
+                    case 3 :
+                        print("Your choice attacker is \(tabNamesOfCharacters[5]))")
+                        
+                    default:
+                        print("You did not choose a character")
+                    }
+                }
+            }
+        }
 //            //Si l'attanquant est Warrior
-//            if attackerCharacter is Warrior {
+//            if attackerCharacter in characterInLife is Warrior {
 //
 //                if let newWaepon = chest.chestmystery() {
 //
@@ -201,23 +218,23 @@ class Game {
 //    }
 //
 //
-//            func fight() {
-//
-//                //tant qu'il y a un personnage en vie dans l'equipe 1 et l'équipe 2
-//                while heroAlive(player: player1) && heroAlive(player: player2) {
-//
-//                    print("joueur1 commence")
-//                    //Attaquer et ajouter un tour
-//                    round(attacker: player1, ennemy: player2)
-//                    numberRound += 1
-//
-//                   //si il reste des personnages c'est au joueur 2 de jouer
-//                    if heroAlive(player: player2) {
-//                        print("joueur 2 choisi ton hero")
-//
-//                        round(attacker: player2, ennemy: player1)
-//                    }
-//                }
-//            }
-//
+////            func fight() {
+////
+////                //tant qu'il y a un personnage en vie dans l'equipe 1 et l'équipe 2
+////                while choiceTeam(player: player1) && choiceTeam(name: <#T##String#>)(player: player2) {
+////
+////                    print("joueur1 commence")
+////                    //Attaquer et ajouter un tour
+////                    round(attacker: player1, ennemy: player2)
+////                    numberRound += 1
+////
+////                   //si il reste des personnages c'est au joueur 2 de jouer
+////                    if heroAlive(player: player2) {
+////                        print("joueur 2 choisi ton hero")
+////
+////                        round(attacker: player2, ennemy: player1)
+////                    }
+////                }
+            }
+
         }
