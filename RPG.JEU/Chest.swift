@@ -19,13 +19,13 @@ class Chest {
     
     func chestmystery() -> Weapon? {
         
-        let randomInt = Int.random(in: 1...4)
+        let randomInt = Int.random(in: 1...10)
         
-        if randomInt == 3 {
+        if randomInt < 5 {
             
             return swissKnife
             
-        } else if randomInt == 7 {
+        } else  {
             return bamboo
             
         }

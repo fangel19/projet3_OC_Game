@@ -27,4 +27,17 @@ class Player {
         }
     }
     
+    func printCharacterInLife() {
+        characterInLife.enumerated().forEach { (index, character) in
+            print("\(index + 1) : \(character.name) (\(character.type) \(character.life) LP - (\(character.weapon.damage) WD)")
+        }
+    }
+    
+    
+    func printCharacterDead() {
+        characterDead.enumerated().forEach { (index, character) in
+            print("\(index + 1) : \(character.name) (\(character.type) \(character.life) LP - (\(character.weapon.damage) WD)")
+        }
+    }
+    
 }
