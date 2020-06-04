@@ -103,7 +103,7 @@ class Game {
             
         } while tabNamesOfCharacters.count != 3
         print(tabNamesOfCharacters[0], tabChoiceOfCharacter[0].type, tabNamesOfCharacters[1], tabChoiceOfCharacter[1].type, tabChoiceOfCharacter[2].type, tabNamesOfCharacters[2])
-        player1 = Player(character: tabChoiceOfCharacter)
+        player1 = Player(character: [tabChoiceOfCharacter[0],  tabChoiceOfCharacter[1], tabChoiceOfCharacter[2]])
                 
         repeat {
             
@@ -124,7 +124,7 @@ class Game {
         } while tabNamesOfCharacters.count != 6
         print(tabNamesOfCharacters[3], tabChoiceOfCharacter[3], tabNamesOfCharacters[4], tabChoiceOfCharacter[4], tabChoiceOfCharacter[5], tabNamesOfCharacters[5])
          //playerTwo = Player(names: [tabNamesOfCharacters[0], tabNamesOfCharacters[1], tabNamesOfCharacters[2]])
-        player2 = Player(character: tabChoiceOfCharacter)
+        player2 = Player(character: [tabChoiceOfCharacter[3],  tabChoiceOfCharacter[4], tabChoiceOfCharacter[5]])
     }
     
     
@@ -151,7 +151,8 @@ class Game {
         print("What's your choice ? (please, pick a number for your attacker) :")
         
         var index: Int = Int()
-        selectedCharacter = playerTurn.characterInLife[index]
+//        selectedCharacter = playerTurn.characterInLife[index]
+        
         
             repeat {
                 index = Tools.shared.getInputInt()
@@ -159,14 +160,17 @@ class Game {
                 switch index {
                 case 1 :
                     index += 1
+                    selectedCharacter = playerTurn.characterInLife[0]
                     print("Your choice attacker is \(playerTurn.characterInLife[0]))")
                     
                 case 2 :
                     index += 1
+                    selectedCharacter = playerTurn.characterInLife[1]
                     print("Your choice attacker is \(playerTurn.characterInLife[1]))")
 
                 case 3 :
                     index += 1
+                    selectedCharacter = playerTurn.characterInLife[2]
                     print("Your choice attacker is \(playerTurn.characterInLife[2]))")
 
             default:
@@ -184,17 +188,20 @@ class Game {
             index = Tools.shared.getInputInt()
 
             switch index {
+            case 1 :
+                index += 1
+                selectedCharacter = playerNotTurn.characterInLife[0]
+                print("Your choice attacker is \(playerNotTurn.characterInLife[0]))")
+                
+            case 2 :
+                index += 1
+                selectedCharacter = playerNotTurn.characterInLife[1]
+                print("Your choice attacker is \(playerNotTurn.characterInLife[1]))")
+                
             case 3 :
                 index += 1
-                print("Your choice attacker is \(playerNotTurn.characterInLife[3]))")
-                
-            case 4 :
-                index += 1
-                print("Your choice attacker is \(playerNotTurn.characterInLife[4]))")
-                
-            case 5 :
-                index += 1
-                print("Your choice attacker is \(playerNotTurn.characterInLife[5]))")
+                selectedCharacter = playerNotTurn.characterInLife[2]
+                print("Your choice attacker is \(playerNotTurn.characterInLife[2]))")
                 
                 
             default:
@@ -202,29 +209,39 @@ class Game {
             }
             
         } while index < 0
+        numberRound += 1
+        print("player 1 attack \(playerTurn.characterInLife) player 2 \(playerNotTurn.characterInLife)")
+      
+        isPlayerOneTurn.toggle()
     }
 
     
-    
-    
-    
-    
-    
-    
-//    func chooseActionToDo() {
-//        let chest = Chest()
-//
-//        let wp = chest.chestmystery()
-//
-//        print("WEAPON MISTERY, (\(wp?.name), (\(wp?.damage)")
-//        //guard let selectedCharacter = selectedCharacter else { return }
-//
-//
-//        //
-//    }
-    
 
+    
+    func chooseActionToDo() {
         
+        guard let selectedCharacter = selectedCharacter else { return }
+        
+        if selectedCharacter is Warrior {
+            
+            let randomChest = Int.random(in: 1...20)
+            if randomChest == 8 {
+                let newChest = Chest()
+                
+                print("WEAPON MISTERY, (\(newChest.chestmystery()?.name), (\(newChest.chestmystery()?.damage)")
+            }
+        }
+        if selectedCharacter is Zombie {
+            
+            let randomChest = Int.random(in: 1...20)
+            if randomChest == 8 {
+                let newChest = Chest()
+                
+                print("WEAPON MISTERY, (\(newChest.chestmystery()?.name), (\(newChest.chestmystery()?.damage)")
+            }
+        }
+        
+    }
         //reste t-il des joueurs en vie
         
     //    func heroAlive(player: Player) -> Bool {
@@ -294,30 +311,7 @@ class Game {
 //                }
 //            }
 //        }
-////            //Si l'attanquant est Warrior
-////            if attackerCharacter in characterInLife is Warrior {
-////
-////                if let newWaepon = chest.chestmystery() {
-////
-////                    print("Coffre magique")
-////
-////                   attacker.damage = newWaepon
-////                }
-////
-////                if attackerCharacter is Zombie {
-////
-////                } else {
-////
-////                    if let newWaepon = chest.chestmystery() {
-////
-////                        print("Coffre magique")
-////
-////                        zombie.weapon = newWaepon
-////                    }
-////
-////                }
-////            }
-////    }
+
 ////
 ////
 //////            func fight() {
@@ -340,26 +334,39 @@ class Game {
 //////                }
 //////            }
 //////    }
-//////
-//////
-////////            func fight() {
 ////////
-////////                //tant qu'il y a un personnage en vie dans l'equipe 1 et l'équipe 2
-////////                while choiceTeam(player: player1) && choiceTeam(name: <#T##String#>)(player: player2) {
-////////
-////////                    print("joueur1 commence")
-////////                    //Attaquer et ajouter un tour
-////////                    round(attacker: player1, ennemy: player2)
-////////                    numberRound += 1
-////////
-////////                   //si il reste des personnages c'est au joueur 2 de jouer
-////////                    if heroAlive(player: player2) {
-////////                        print("joueur 2 choisi ton hero")
-////////
-////////                        round(attacker: player2, ennemy: player1)
-////////                    }
-////////                }
-////            }
+//    // Function that checks if all the characters of a team are dead.
+//       private func teamIsAlive(player: Player) -> Bool {
+//           //  the loop for in allows to check if the character to 0pv and if yes delete of the array
+//           for(index, character)  in player.team.enumerated() {
+//               if  character.life <= 0{
+//                   characterDead.append(character)
+//                   player.team.remove(at: index)
+//               }
+//           }
+//           // return false when all the team was dead
+//           if  player.team.count == 0 {
+//               return false
+//           }
+//           //   return true when there is at least 1 character
+//           return true
+//       }
+    
 //
+//       /// Function that displays the winner as well as the game stats.
+//       private func statsGame() {
+//            print("Oh oh... Toute l'équipe est morte !")
+//           if teamIsAlive(player: player1) {
+//               print( "Le joueur 1 a gagné !")
+//           } else {
+//               print("Le joueur 2 a gagné !")
+//           }
+//            print("Le nombre de tours : \(numberTurn)")
+//            print("Les personnages morts sont :")
+//            for  characterDead in arrayDead {
+//               print("Le personnage \(characterDead.nameHero) qui est \(type(of: characterDead)) \(characterDead.lifePoint)points de vie ")
+//            }
+//       }
+
         
 }

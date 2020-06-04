@@ -9,7 +9,14 @@
 import Foundation
 
 class Tools {
+    
     static let shared: Tools = Tools()
+    
+    var numberRound: Int = Int()
+    
+    func increaseTurn() {
+        numberRound += 1
+    }
     
     func getInputString() -> String {
         let str = readLine()
