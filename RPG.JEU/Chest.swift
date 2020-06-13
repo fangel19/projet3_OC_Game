@@ -29,7 +29,6 @@ class Chest {
             return bamboo
             
         }
-            return nil
+        
     }
-
 }
