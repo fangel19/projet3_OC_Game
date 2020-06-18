@@ -210,35 +210,32 @@ class Game {
             
         } while index < 0
         numberRound += 1
-        //        print("player 1 attack \(playerTurn.characterInLife) player 2 \(playerNotTurn.characterInLife)")
+        doAction()
         
         isPlayerOneTurn.toggle()
     }
     
     
     
-    func fight() {
+    func doAction() {
         
-        var attackingCharacter = playerTurn?.characterInLife.description
-        var defenderCharacter = playerNotTurn?.characterInLife.description
-        
-        if attackingCharacter == "Warrior" {
-            chooseActionToDo()
-            Character.attack(defenderCharacter)
+        if selectedCharacter?.type == "Warrior" {surpriseChest()
+            selectedCharacter?.attack(target: playerNotTurn?.characterInLife)
             
         }
-        else if attackingCharacter == "Zombie" {
-            chooseActionToDo()
-            //            Character.attack(Character)
-            
+        else if selectedCharacter is Zombie {surpriseChest()
+            let zombie = selectedCharacter as! Zombie
+            Zombie.attack(<#T##self: Zombie##Zombie#>)
         } else {
             
-            attackingCharacter = "Magician"
-            //                Magician.attack(Character)
-            
+            selectedCharacter is Magician
+            selectedCharacter(playerTurn?.characterInLife.enumerated())
         }
+        //                Magician.attack(Character)
+        
     }
-    func chooseActionToDo() {
+    
+    func surpriseChest() {
         
         //        guard let selectedCharacter = selectedCharacter else { return }
         
@@ -254,41 +251,41 @@ class Game {
     
     
     
+    //
+    //    func heroAlive(player: Player) -> Bool {
+    //
+    //        //permet de verifier si le hero est toujours en vie et de le supprimer ci il n'a plus de point de vie
+    //        for(index, character) in player.team.enumerated() {
+    //            if character.life <= 0 {
+    //                player.characterDead.append(character)
+    //                player.team.remove(at: index)
+    //            }
+    //        }
+    //        //return false if team is dead
+    //        if player.team.count == 0 {
+    //            return false
+    //        }
+    //        //return True if i have one character
+    //        return true
+    //    }
+    //
+    //           /// Function that displays the winner as well as the game stats.
+    //    private func statsGame() {
+    //
+    //        print("The team is dead !")
+    //        if player1?.characterInLife.count == 0 {
+    //            print( "The player 2 is a Winner")
+    //
+    //               } else {
+    //                   print("The player 2 is a winner")
+    //               }
+    //                print("The number of round is : \(numberRound)")
+    //                print("The Character Dead is :")
+    //
+    //        for characterDead in player1?.characterDead {
+    //                   print("The character \(characterDead.name) is \(type(of: characterDead)) \(characterDead.life) life point ")
+    //                }
+    //           }
     
-    func heroAlive(player: Player) -> Bool {
-        
-        //permet de verifier si le hero est toujours en vie et de le supprimer ci il n'a plus de point de vie
-        for(index, character) in player.team.enumerated() {
-            if character.life <= 0 {
-                player.characterDead.append(character)
-                player.team.remove(at: index)
-            }
-        }
-        //return false if team is dead
-        if player.team.count == 0 {
-            return false
-        }
-        //return True if i have one character
-        return true
-    }
-    
-           /// Function that displays the winner as well as the game stats.
-    private func statsGame() {
-        
-        print("The team is dead !")
-        if player1?.characterInLife.count == 0 {
-            print( "The player 2 is a Winner")
-                
-               } else {
-                   print("The player 2 is a winner")
-               }
-                print("The number of round is : \(numberRound)")
-                print("The Character Dead is :")
-       
-        for characterDead in player1?.characterDead {
-                   print("The character \(characterDead.name) is \(type(of: characterDead)) \(characterDead.life) life point ")
-                }
-           }
-
 }
 

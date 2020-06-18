@@ -21,15 +21,15 @@ class Player {
     init(character: [Character]) {
         character.forEach { (character) in
             self.characterInLife.append(character)
-            self.characterDead.append(character)
+//            self.characterDead.append(character)
         }
         for i in characterInLife {
             print("CHARACTER ALIVE ->", i.name, i.life, i.type, i.weapon)
         }
-        for i in characterDead {
-            print("CHARACTER DEAD ->", i.name, i.life, i.type, i.weapon)
-
-        }
+//        for i in characterDead {
+//            print("CHARACTER DEAD ->", i.name, i.life, i.type, i.weapon)
+//
+//        }
     }
     
     func printCharacterInLife() {
