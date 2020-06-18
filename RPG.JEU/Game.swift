@@ -17,8 +17,8 @@ class Game {
     
     private var isPlayerOneTurn: Bool = true
     
-    private var selectedCharacter: Character?
-    
+    private var playerTurnSelectedCharacter: Character?
+    private var playerNotTurnSelectedCharacter: Character?
     
     var numberRound = 0
     
@@ -134,6 +134,8 @@ class Game {
         playerTurn = (isPlayerOneTurn) ? player1 : player2
         playerNotTurn = (isPlayerOneTurn) ? player2 : player1
         
+        var isAttacking: Bool?
+        
         guard let playerTurn = playerTurn else { return }
         guard let playerNotTurn = playerNotTurn else { return }
         
@@ -160,23 +162,26 @@ class Game {
             switch index {
             case 1 :
                 index += 1
-                selectedCharacter = playerTurn.characterInLife[0]
+                playerTurnSelectedCharacter = playerTurn.characterInLife[0]
                 print("Your choice attacker is \(playerTurn.characterInLife[0]))")
                 
             case 2 :
                 index += 1
-                selectedCharacter = playerTurn.characterInLife[1]
+                playerTurnSelectedCharacter = playerTurn.characterInLife[1]
                 print("Your choice attacker is \(playerTurn.characterInLife[1]))")
                 
             case 3 :
                 index += 1
-                selectedCharacter = playerTurn.characterInLife[2]
+                playerTurnSelectedCharacter = playerTurn.characterInLife[2]
                 print("Your choice attacker is \(playerTurn.characterInLife[2]))")
                 
             default:
                 print("You did not choose a character")
             }
         } while index < 0
+        
+        if playerTurnSelectedCharacter?.type != "Magician" {
+        
         
         
         playerNotTurn.printCharacterInLife()
@@ -190,17 +195,17 @@ class Game {
             switch index {
             case 1 :
                 index += 1
-                selectedCharacter = playerNotTurn.characterInLife[0]
+                playerNotTurnSelectedCharacter = playerNotTurn.characterInLife[0]
                 print("Your choice ennemy is \(playerNotTurn.characterInLife[0]))")
                 
             case 2 :
                 index += 1
-                selectedCharacter = playerNotTurn.characterInLife[1]
+                playerNotTurnSelectedCharacter = playerNotTurn.characterInLife[1]
                 print("Your choice ennemy is \(playerNotTurn.characterInLife[1]))")
                 
             case 3 :
                 index += 1
-                selectedCharacter = playerNotTurn.characterInLife[2]
+                playerNotTurnSelectedCharacter = playerNotTurn.characterInLife[2]
                 print("Your choice ennemy is \(playerNotTurn.characterInLife[2]))")
                 
                 
@@ -209,31 +214,33 @@ class Game {
             }
             
         } while index < 0
+            surpriseChest()
+            playerTurnSelectedCharacter?.attack(target: playerNotTurnSelectedCharacter!)
+       
+        } else {
+            var index: Int = 0
+            let rangeMax: Int = playerTurn.characterInLife.count - 1
+            let rangeMin: Int = playerTurn.characterInLife.count - (playerTurn.characterInLife.count - 1) - 1
+            print("Witch character you want to heal ?")
+            playerTurn.printCharacterInLife()
+            
+            repeat {
+                index = Tools.shared.getInputInt() - 1
+                if index < rangeMin || index > rangeMax {
+                    print("Number should be between \(rangeMin + 1) and \(rangeMax + 1)")
+                }
+            }
+            while index < rangeMin || index > rangeMax
+            playerTurnSelectedCharacter?.heal(target: playerTurn.characterInLife[index])
+        
+        }
         numberRound += 1
-        doAction()
         
         isPlayerOneTurn.toggle()
     }
     
     
     
-    func doAction() {
-        
-        if selectedCharacter?.type == "Warrior" {surpriseChest()
-            selectedCharacter?.attack(target: playerNotTurn?.characterInLife)
-            
-        }
-        else if selectedCharacter is Zombie {surpriseChest()
-            let zombie = selectedCharacter as! Zombie
-            Zombie.attack(<#T##self: Zombie##Zombie#>)
-        } else {
-            
-            selectedCharacter is Magician
-            selectedCharacter(playerTurn?.characterInLife.enumerated())
-        }
-        //                Magician.attack(Character)
-        
-    }
     
     func surpriseChest() {
         
