@@ -123,24 +123,21 @@ class Game {
             
         } while tabNamesOfCharacters.count != 6
         print(tabNamesOfCharacters[3], tabChoiceOfCharacter[3], tabNamesOfCharacters[4], tabChoiceOfCharacter[4], tabChoiceOfCharacter[5], tabNamesOfCharacters[5])
-        //playerTwo = Player(names: [tabNamesOfCharacters[0], tabNamesOfCharacters[1], tabNamesOfCharacters[2]])
+        
         player2 = Player(character: [tabChoiceOfCharacter[3],  tabChoiceOfCharacter[4], tabChoiceOfCharacter[5]])
     }
     
-    
+    // function which asks the player to choose an attacker and an enemy in each team
     
     func selectCharacter() {
         
         playerTurn = (isPlayerOneTurn) ? player1 : player2
         playerNotTurn = (isPlayerOneTurn) ? player2 : player1
         
-        var isAttacking: Bool?
         
         guard let playerTurn = playerTurn else { return }
         guard let playerNotTurn = playerNotTurn else { return }
         
-        // MARK: - Version ternaire du if ci dessous
-        //isPlayerOneTurn ? print("\nPlayer 1: Choose a character :") : print("\nPlayer 2: Choose a character :")
         
         if isPlayerOneTurn {
             print("\nPlayer 1: Choose a character :")
@@ -152,8 +149,53 @@ class Game {
         
         print("What's your choice ? (please, pick a number for your attacker) :")
         
+        attacker()
+        
+        // But if he chooses the magician, he will have to choose who to give life to
+        
+        guard let playerTurnSelectedCharacter = playerTurnSelectedCharacter else {
+            return
+        }
+        if playerTurnSelectedCharacter.type != "Magician" {
+            
+            
+            playerNotTurn.printCharacterInLife()
+            
+            print("What's your choice ? (please, pick a number for your ennemy) :")
+            
+            ennemy()
+            
+            surpriseChest()
+            playerTurnSelectedCharacter.attack(target: playerNotTurnSelectedCharacter!)
+            
+            // this coding allows later to add characters to the team without creating a bug
+        } else {
+            var index: Int = 0
+            let rangeMax: Int = playerTurn.characterInLife.count - 1
+            let rangeMin: Int = playerTurn.characterInLife.count - (playerTurn.characterInLife.count - 1) - 1
+            print("Witch character you want to heal ?")
+            playerTurn.printCharacterInLife()
+            
+            repeat {
+                index = Tools.shared.getInputInt() - 1
+                if index < rangeMin || index > rangeMax {
+                    print("Number should be between \(rangeMin + 1) and \(rangeMax + 1)")
+                }
+            }
+                while index < rangeMin || index > rangeMax
+            playerTurnSelectedCharacter.heal(target: playerTurn.characterInLife[index])
+            
+        }
+        numberRound += 1
+        
+        isPlayerOneTurn.toggle()
+        
+    }
+    
+    func attacker() {
+        
         var index: Int = Int()
-        //        selectedCharacter = playerTurn.characterInLife[index]
+        guard let playerTurn = playerTurn else { return }
         
         
         repeat {
@@ -179,14 +221,13 @@ class Game {
                 print("You did not choose a character")
             }
         } while index < 0
+    }
+    
+    
+    func ennemy() {
         
-        if playerTurnSelectedCharacter?.type != "Magician" {
-        
-        
-        
-        playerNotTurn.printCharacterInLife()
-        
-        print("What's your choice ? (please, pick a number for your ennemy) :")
+        var index: Int = Int()
+        guard let playerNotTurn = playerNotTurn else { return }
         
         
         repeat {
@@ -214,39 +255,10 @@ class Game {
             }
             
         } while index < 0
-            surpriseChest()
-            playerTurnSelectedCharacter?.attack(target: playerNotTurnSelectedCharacter!)
-       
-        } else {
-            var index: Int = 0
-            let rangeMax: Int = playerTurn.characterInLife.count - 1
-            let rangeMin: Int = playerTurn.characterInLife.count - (playerTurn.characterInLife.count - 1) - 1
-            print("Witch character you want to heal ?")
-            playerTurn.printCharacterInLife()
-            
-            repeat {
-                index = Tools.shared.getInputInt() - 1
-                if index < rangeMin || index > rangeMax {
-                    print("Number should be between \(rangeMin + 1) and \(rangeMax + 1)")
-                }
-            }
-            while index < rangeMin || index > rangeMax
-            playerTurnSelectedCharacter?.heal(target: playerTurn.characterInLife[index])
-        
-        }
-        numberRound += 1
-        
-        isPlayerOneTurn.toggle()
     }
     
-    
-    
-    
+    // function that brings up a random chest
     func surpriseChest() {
-        
-        //        guard let selectedCharacter = selectedCharacter else { return }
-        
-        //        if selectedCharacter is Warrior {
         
         let randomChest = Int.random(in: 1...20)
         if randomChest == 8 {
@@ -257,24 +269,22 @@ class Game {
     }
     
     
-    
-    //
-    //    func heroAlive(player: Player) -> Bool {
-    //
-    //        //permet de verifier si le hero est toujours en vie et de le supprimer ci il n'a plus de point de vie
-    //        for(index, character) in player.team.enumerated() {
-    //            if character.life <= 0 {
-    //                player.characterDead.append(character)
-    //                player.team.remove(at: index)
-    //            }
-    //        }
-    //        //return false if team is dead
-    //        if player.team.count == 0 {
-    //            return false
-    //        }
-    //        //return True if i have one character
-    //        return true
-    //    }
+    func heroAlive(player: Player) -> Bool {
+        // allows to check if the hero is still alive and to delete it he has no more life
+        for(index, character) in player.team.enumerated() {
+            if character.life <= 0 {
+                player.characterDead.append(character)
+                player.team.remove(at: index)
+            }
+        }
+        //return false if team is dead
+        if player.team.count == 0 {
+            return false
+        }
+        //return True if i have one character
+        return true
+        
+    }
     //
     //           /// Function that displays the winner as well as the game stats.
     //    private func statsGame() {
@@ -294,5 +304,5 @@ class Game {
     //                }
     //           }
     
+    
 }
-
