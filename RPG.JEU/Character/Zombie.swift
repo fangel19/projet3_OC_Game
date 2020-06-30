@@ -8,15 +8,17 @@
 
 import Foundation
 
-
-//Créer la classe Zombie
+// Create the Zombie Class
 
 class Zombie: Character {
+    
+    // Zombir have 150 pts of life and Denture is her Weapon
+
     static let type = "Zombie"
     static let life = 150
     static let weapon = Denture()
     
-    //initier la Zombie
+    // Initialize Zombie
 
     init(name: String) {
         super.init(type: "Zombie", name: name, weapon: Denture(), life: 150)

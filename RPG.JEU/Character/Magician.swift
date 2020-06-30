@@ -8,15 +8,17 @@
 
 import Foundation
 
-//Créer la classe Magician
+// Create the Magician Class
 
 class Magician: Character {
+    
+    // Magician have 250 pts of life and Drug is her Weapon
     
     static let type = "Magician"
     static let life = 250
     static let weapon = Drug()
     
-    //initier la Magician
+    // Initialize Magician
 
     init(name: String) {
         super.init(type: "Magician", name: name, weapon: Drug(), life: 250)

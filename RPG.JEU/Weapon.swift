@@ -8,17 +8,17 @@
 
 import Foundation
 
-// Créer la classe Weapon
+//Create the Weapon Class
 
 class Weapon {
     
-    // créer les prorpiété : name, damage
+    //Creation of the property of : name, damage
     
     var name: String
     var damage: Int
     
     
-    //Initier la classe
+    //Initialize
     
     init(name: String, damage: Int) {
         self.name = name

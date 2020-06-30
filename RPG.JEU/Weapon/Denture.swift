@@ -8,6 +8,8 @@
 
 import Foundation
 
+//Create the Denture Class, with 33 pts of damage
+
 class Denture: Weapon {
     
     init() {

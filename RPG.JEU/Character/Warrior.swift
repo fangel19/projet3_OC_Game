@@ -8,14 +8,17 @@
 
 import Foundation
 
-//Créer la classe Warrior
+// Create the Warrior Class
 
 class Warrior: Character {
+    
+    // Warrior have 200 pts of life and Lightsaber is her Weapon
+    
     static let type = "Warrior"
     static let life = 200
     static let weapon = Lightsaber()
     
-    //initier la Warrior
+    // Initialize Warrior
     
     init(name: String) {
         super.init(type: "Warrior", name: name, weapon: Lightsaber(), life: 200)

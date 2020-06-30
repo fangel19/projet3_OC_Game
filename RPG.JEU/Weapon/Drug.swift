@@ -8,7 +8,8 @@
 
 import Foundation
 
-//Le médicament à 20 point de vie
+//Create the Drug Class, with - 20 pts of damage
+
 class Drug: Weapon {
     
     init() {

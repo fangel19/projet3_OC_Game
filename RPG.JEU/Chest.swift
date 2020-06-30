@@ -8,16 +8,20 @@
 
 import Foundation
 
+//Create the Chest Class
 
 class Chest {
     
-    //coffre magique avec deux armes
-    let swissKnife = Weapon(name: "swiwwKnife", damage: 35)
-    let bamboo = Weapon(name: "swiwwKnife", damage: 10)
+    /*Magic chest with two weapons :
+     swissKnife with 35 pts of damage
+     bamboo with 10 pts of damage*/
     
-    //fonction chestmystery pour avoir un tirage aléatoir
+    let swissKnife = Weapon(name: "swissKnife", damage: 35)
+    let bamboo = Weapon(name: "bamboo", damage: 10)
     
-    func chestmystery() -> Weapon? {
+    //Creation of a chestmystery function to display a random chest
+    
+    func chestmystery() -> Weapon {
         
         let randomInt = Int.random(in: 1...10)
         

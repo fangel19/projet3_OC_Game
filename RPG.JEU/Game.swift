@@ -7,7 +7,8 @@
 //
 
 import Foundation
-// class Game
+//Creation the Game class
+
 class Game {
     
     private var player1: Player?
@@ -38,6 +39,8 @@ class Game {
     func choiceTeam(name: String) -> Character {
         
         var teamnumber = 0
+        
+        //You have a choice with three character : Warrior, Magician, Zombie
         
         print("choice a characters"
             + "\n1. The Warrior with 200 life points and 23 attack point"
@@ -166,7 +169,7 @@ class Game {
             ennemy()
             
             surpriseChest()
-            playerTurnSelectedCharacter.attack(target: playerNotTurnSelectedCharacter!)
+            playerTurnSelectedCharacter.attack(target: playerNotTurnSelectedCharacter!, player: playerNotTurn)
             
             // this coding allows later to add characters to the team without creating a bug
         } else {
@@ -189,7 +192,15 @@ class Game {
         numberRound += 1
         
         isPlayerOneTurn.toggle()
-        
+        if !isPlayerOneTurn {
+            Tools.shared.increaseTurn()
+        }
+        if !(playerTurn.numberOfCharacterDies == 3) && !(playerNotTurn.numberOfCharacterDies == 3) {
+            launchTurn()
+                
+        } else {
+            statsGame()
+        }
     }
     
     func attacker() {
@@ -259,50 +270,41 @@ class Game {
     
     // function that brings up a random chest
     func surpriseChest() {
+        guard let selectCharacter = playerTurnSelectedCharacter else { return }
         
-        let randomChest = Int.random(in: 1...20)
-        if randomChest == 8 {
-            let newWeapon = Chest()
+        let randomChest = Int.random(in: 1...8)
+        if randomChest == 4 {
+            let chest = Chest()
+            selectCharacter.weapon = chest.chestmystery()
             
-            print("WEAPON MISTERY, (\(newWeapon.chestmystery()?.name), (\(newWeapon.chestmystery()?.damage)")
+            print("WEAPON MISTERY, (\(selectCharacter.weapon.name), (\(selectCharacter.weapon.damage)")
         }
     }
     
     
-    func heroAlive(player: Player) -> Bool {
-        // allows to check if the hero is still alive and to delete it he has no more life
-        for(index, character) in player.team.enumerated() {
-            if character.life <= 0 {
-                player.characterDead.append(character)
-                player.team.remove(at: index)
-            }
-        }
-        //return false if team is dead
-        if player.team.count == 0 {
-            return false
-        }
-        //return True if i have one character
-        return true
-        
+    func launchTurn() {
+        selectCharacter()
     }
-    //
-    //           /// Function that displays the winner as well as the game stats.
-    //    private func statsGame() {
-    //
-    //        print("The team is dead !")
-    //        if player1?.characterInLife.count == 0 {
-    //            print( "The player 2 is a Winner")
-    //
-    //               } else {
-    //                   print("The player 2 is a winner")
-    //               }
-    //                print("The number of round is : \(numberRound)")
-    //                print("The Character Dead is :")
-    //
-    //        for characterDead in player1?.characterDead {
-    //                   print("The character \(characterDead.name) is \(type(of: characterDead)) \(characterDead.life) life point ")
-    //                }
-    //           }
-    
-    
+    func statsGame() {
+        print("Fin de partie")
+    }
+//               /// Function that displays the winner as well as the game stats.
+//        private func statsGame() {
+//
+//            print("The team is dead !")
+//            if player1?.characterInLife.count == 0 {
+//                print( "The player 2 is a Winner")
+//
+//                   } else {
+//                       print("The player 1 is a winner")
+//                   }
+//                    print("The number of round is : \(numberRound)")
+//                    print("The Character Dead is :")
+//
+//            for characterDead in player1?.characterDead() {
+//                       print("The character \(characterDead.name) is \(type(of: characterDead)) \(characterDead.life) life point ")
+//                    }
+//               }
+//
+//    
 }

@@ -15,21 +15,16 @@ class Player {
     // tableau de perso mort ?
     var characterInLife: [Character] = [Character]()
     var characterDead: [Character] = [Character]()
-
-    var team = [Character]()
-    
+    var numberOfCharacterDies: Int = 0
+        
     init(character: [Character]) {
         character.forEach { (character) in
             self.characterInLife.append(character)
-//            self.characterDead.append(character)
         }
-        for i in characterInLife {
-            print("CHARACTER ALIVE ->", i.name, i.life, i.type, i.weapon)
-        }
-//        for i in characterDead {
-//            print("CHARACTER DEAD ->", i.name, i.life, i.type, i.weapon)
-//
+//        for i in characterInLife {
+//            print("CHARACTER ALIVE ->", i.name, i.life, i.type, i.weapon)
 //        }
+
     }
     
     func printCharacterInLife() {
