@@ -13,6 +13,6 @@ import Foundation
 class Denture: Weapon {
     
     init() {
-        super.init(name: "Denture", damage: 33)
+        super.init(name: "Denture", damage: 63)
     }
 }

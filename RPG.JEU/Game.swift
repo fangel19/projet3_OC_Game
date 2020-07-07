@@ -43,9 +43,9 @@ class Game {
         //You have a choice with three character : Warrior, Magician, Zombie
         
         print("choice a characters"
-            + "\n1. The Warrior with 200 life points and 23 attack point"
-            + "\n2. The Magician with 250 life points and 20 attack point of care"
-            + "\n3. The Zombie with 150 life points and 33 attack point")
+            + "\n1. The Warrior with 200 life points and 53 attack point"
+            + "\n2. The Magician with 250 life points and 50 heal power"
+            + "\n3. The Zombie with 150 life points and 63 attack point")
         
         repeat {
             
@@ -92,6 +92,7 @@ class Game {
         var tabChoiceOfCharacter: [Character] = [Character]()
         
         repeat {
+//            player 1 choice a character in fonction choiceTeam
             
             print("\n Player 1 -> Choice name of your character \(tabNamesOfCharacters.count + 1) :")
             var check: Bool = false
@@ -112,6 +113,8 @@ class Game {
         
         player1 = Player(character: [tabChoiceOfCharacter[0],  tabChoiceOfCharacter[1], tabChoiceOfCharacter[2]])
         
+            
+
         repeat {
             
             print("\n Player 2 -> Choice name of your character  \(tabNamesOfCharacters.count - 2) : ")
@@ -133,6 +136,15 @@ class Game {
         
         player2 = Player(character: [tabChoiceOfCharacter[3],  tabChoiceOfCharacter[4], tabChoiceOfCharacter[5]])
     }
+    
+//    func justOneMagician() {
+//
+//        guard let choiceMagician = askNameOfCha else { return }
+//
+//        if choiceMagician {
+//
+//        }
+//    }
     
     // function which asks the player to choose an attacker and an enemy in each team
     
@@ -156,7 +168,7 @@ class Game {
         
         print("What's your choice ? (please, pick a number for your attacker) :")
         
-        attacker()
+        choiceAttacker()
         
         // But if he chooses the magician, he will have to choose who to give life to
         
@@ -170,7 +182,7 @@ class Game {
             
             print("What's your choice ? (please, pick a number for your ennemy) :")
             
-            ennemy()
+            choiceEnnemy()
             
             surpriseChest()
             playerTurnSelectedCharacter.attack(target: playerNotTurnSelectedCharacter!, player: playerNotTurn)
@@ -207,70 +219,41 @@ class Game {
         }
     }
     
-    func attacker() {
+    func choiceAttacker() {
         
         var index: Int = Int()
         guard let playerTurn = playerTurn else { return }
-        
+        let rangMax: Int = playerTurn.characterInLife.count - 1
+        let rangMin: Int = playerTurn.characterInLife.count - (playerTurn.characterInLife.count - 1) - 1
         
         repeat {
-            index = Tools.shared.getInputInt()
-            
-            switch index {
-            case 1 :
-                index += 1
-                playerTurnSelectedCharacter = playerTurn.characterInLife[0]
-                print("Your choice attacker is \(playerTurn.characterInLife[0]))")
-                
-            case 2 :
-                index += 1
-                playerTurnSelectedCharacter = playerTurn.characterInLife[1]
-                print("Your choice attacker is \(playerTurn.characterInLife[1]))")
-                
-            case 3 :
-                index += 1
-                playerTurnSelectedCharacter = playerTurn.characterInLife[2]
-                print("Your choice attacker is \(playerTurn.characterInLife[2]))")
-                
-            default:
-                print("You did not choose a character")
+            index = Tools.shared.getInputInt() - 1
+            if index < rangMin || index > rangMax {
+                print("Number should be \(rangMin + 1) and \(rangMax + 1)")
             }
-        } while index < 0
+            
+        } while index < rangMin || index > rangMax
+        playerTurnSelectedCharacter = playerTurn.characterInLife[index]
     }
     
     
-    func ennemy() {
+    func choiceEnnemy() {
         
         var index: Int = Int()
-        guard let playerNotTurn = playerNotTurn else { return }
-        
-        
-        repeat {
-            index = Tools.shared.getInputInt()
+            guard let playerNotTurn = playerNotTurn else { return }
+            let rangMax: Int = playerNotTurn.characterInLife.count - 1
+            let rangMin: Int = playerNotTurn.characterInLife.count - (playerNotTurn.characterInLife.count - 1) - 1
             
-            switch index {
-            case 1 :
-                index += 1
-                playerNotTurnSelectedCharacter = playerNotTurn.characterInLife[0]
-                print("Your choice ennemy is \(playerNotTurn.characterInLife[0]))")
+            repeat {
+                index = Tools.shared.getInputInt() - 1
+                if index < rangMin || index > rangMax {
+                    print("Number should be \(rangMin + 1) and \(rangMax + 1)")
+                }
                 
-            case 2 :
-                index += 1
-                playerNotTurnSelectedCharacter = playerNotTurn.characterInLife[1]
-                print("Your choice ennemy is \(playerNotTurn.characterInLife[1]))")
-                
-            case 3 :
-                index += 1
-                playerNotTurnSelectedCharacter = playerNotTurn.characterInLife[2]
-                print("Your choice ennemy is \(playerNotTurn.characterInLife[2]))")
-                
-                
-            default:
-                print("You did not choose a character")
-            }
-            
-        } while index < 0
-    }
+            } while index < rangMin || index > rangMax
+            playerNotTurnSelectedCharacter = playerNotTurn.characterInLife[index]
+        }
+    
     
     // function that brings up a random chest
     func surpriseChest() {
@@ -281,7 +264,7 @@ class Game {
             let chest = Chest()
             selectCharacter.weapon = chest.chestmystery()
             
-            print("WEAPON MISTERY, (\(selectCharacter.weapon.name), (\(selectCharacter.weapon.damage)")
+            print("WEAPON MISTERY, \(selectCharacter.weapon.name), \(selectCharacter.weapon.damage)")
         }
     }
     
@@ -295,33 +278,48 @@ class Game {
     func statsGame() {
         // Function "statsGame" that displays the winner as well as the game stats.
         //         if player 1 does not have a living character, the winner is player 2
-        print("The team is dead !")
-        
-        if player1?.characterInLife.count == 0 {
-            print( "The player 2 is a Winner")
+//        print("The team is dead !")
+        isPlayerOneTurn ? print("\nThe player 2 Wins") : print("\nThe player 1 Wins")
+//        if player1?.characterInLife.count == 0 {
+
             
             // check that it is player 2
             guard let player2 = player2 else { return }
-            
+        if player2.characterInLife.count > 0 {
+            print("\nPlayer 2 character in life : ")
+            player2.printCharacterInLife()
+        }
+        
+        if player2.characterDead.count > 0 {
+            print("\nPlayer 2 character deads : ")
+            player2.printCharacterDead()
+        }
             // display the characters still alive for the player 2
-            for (_, characterInLife) in player2.characterInLife.enumerated() {
-                print("The character \(characterInLife.name) is \(type(of: characterInLife)) \(characterInLife.life) life point ")
-                print("The number of round is : \(numberRound)")
-            }
+//            for (_, characterInLife) in player2.characterInLife.enumerated() {
+//                print("The character \(characterInLife.name) is \(type(of: characterInLife)) \(characterInLife.life) life point ")
+//                print("The number of round is : \(numberRound)")
+//            }
             
-        } else {
-            print("The player 1 is a winner")
+//        } else {
             
             // check that it is player 1
             guard let player1 = player1 else { return }
-            
-            // display the characters still alive for the player 1
-            for (_, characterInLife) in player1.characterInLife.enumerated() {
-                print("The character \(characterInLife.name) is \(type(of: characterInLife)) \(characterInLife.life) life point ")
-                print("The number of round is : \(numberRound)")
-                
+            if player1.characterInLife.count > 0 {
+                print("\nPlayer 1 character in life : ")
+                player1.printCharacterInLife()
             }
-        }
+            
+            if player1.characterDead.count > 0 {
+                print("\nPlayer 1 character deads : ")
+                player1.printCharacterDead()
+            }
+            // display the characters still alive for the player 1
+//            for (_, characterInLife) in player1.characterInLife.enumerated() {
+//                print("The character \(characterInLife.name) is \(type(of: characterInLife)) \(characterInLife.life) life point ")
+//                print("The number of round is : \(numberRound)")
+//
+//            }
+//        }
         print("The party is over")
         
     }

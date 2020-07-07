@@ -13,6 +13,6 @@ import Foundation
 class Lightsaber: Weapon {
     
     init() {
-        super.init(name: "Lightsaber", damage: 23)
+        super.init(name: "Lightsaber", damage: 53)
     }
 }

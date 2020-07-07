@@ -13,6 +13,6 @@ import Foundation
 class Drug: Weapon {
     
     init() {
-        super.init(name: "Drug", damage: -20)
+        super.init(name: "Drug", damage: -50)
     }
 }

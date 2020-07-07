@@ -16,8 +16,8 @@ class Chest {
      swissKnife with 35 pts of damage
      bamboo with 10 pts of damage*/
     
-    let swissKnife = Weapon(name: "swissKnife", damage: 35)
-    let bamboo = Weapon(name: "bamboo", damage: 10)
+    let swissKnife = Weapon(name: "swissKnife", damage: 75)
+    let bamboo = Weapon(name: "bamboo", damage: 30)
     
     //Creation of a chestmystery function to display a random chest
     
