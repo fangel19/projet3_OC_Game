@@ -71,8 +71,11 @@ class Game {
                     
                 default:
                     print("You did not choose a character")
+                    
                 }
+                                
             }
+        
             // Repeat until the user has chosen a character
             
         } while teamnumber < 1
@@ -106,6 +109,7 @@ class Game {
             
         } while tabNamesOfCharacters.count != 3
         print(tabNamesOfCharacters[0], tabChoiceOfCharacter[0].type, tabNamesOfCharacters[1], tabChoiceOfCharacter[1].type, tabChoiceOfCharacter[2].type, tabNamesOfCharacters[2])
+        
         player1 = Player(character: [tabChoiceOfCharacter[0],  tabChoiceOfCharacter[1], tabChoiceOfCharacter[2]])
         
         repeat {
@@ -285,26 +289,42 @@ class Game {
     func launchTurn() {
         selectCharacter()
     }
+    
+    
+
     func statsGame() {
-        print("Fin de partie")
+        // Function "statsGame" that displays the winner as well as the game stats.
+        //         if player 1 does not have a living character, the winner is player 2
+        print("The team is dead !")
+        
+        if player1?.characterInLife.count == 0 {
+            print( "The player 2 is a Winner")
+            
+            // check that it is player 2
+            guard let player2 = player2 else { return }
+            
+            // display the characters still alive for the player 2
+            for (_, characterInLife) in player2.characterInLife.enumerated() {
+                print("The character \(characterInLife.name) is \(type(of: characterInLife)) \(characterInLife.life) life point ")
+                print("The number of round is : \(numberRound)")
+            }
+            
+        } else {
+            print("The player 1 is a winner")
+            
+            // check that it is player 1
+            guard let player1 = player1 else { return }
+            
+            // display the characters still alive for the player 1
+            for (_, characterInLife) in player1.characterInLife.enumerated() {
+                print("The character \(characterInLife.name) is \(type(of: characterInLife)) \(characterInLife.life) life point ")
+                print("The number of round is : \(numberRound)")
+                
+            }
+        }
+        print("The party is over")
+        
     }
-//               /// Function that displays the winner as well as the game stats.
-//        private func statsGame() {
-//
-//            print("The team is dead !")
-//            if player1?.characterInLife.count == 0 {
-//                print( "The player 2 is a Winner")
-//
-//                   } else {
-//                       print("The player 1 is a winner")
-//                   }
-//                    print("The number of round is : \(numberRound)")
-//                    print("The Character Dead is :")
-//
-//            for characterDead in player1?.characterDead() {
-//                       print("The character \(characterDead.name) is \(type(of: characterDead)) \(characterDead.life) life point ")
-//                    }
-//               }
-//
-//    
+    
+    
 }
