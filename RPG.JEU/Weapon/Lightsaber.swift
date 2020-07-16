@@ -8,7 +8,7 @@
 
 import Foundation
 
-//Create the Lightsaber Class, with 23 pts of damage
+// Creation of the lightsaber class, with 53 points of damage
 
 class Lightsaber: Weapon {
     

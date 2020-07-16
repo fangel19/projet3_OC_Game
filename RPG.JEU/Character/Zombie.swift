@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Create the Zombie Class
+// Creation of the Zombie Class
 
 class Zombie: Character {
     

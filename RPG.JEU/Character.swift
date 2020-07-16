@@ -8,7 +8,7 @@
 
 import Foundation
 
-//Create the Character Class, with function attack and heal
+// Creation of the Character Class, with function attack and heal
 
 class Character {
     

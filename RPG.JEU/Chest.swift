@@ -13,8 +13,8 @@ import Foundation
 class Chest {
     
     /*Magic chest with two weapons :
-     swissKnife with 35 pts of damage
-     bamboo with 10 pts of damage*/
+     swissKnife with 75 pts of damage
+     bamboo with 30 pts of damage*/
     
     let swissKnife = Weapon(name: "swissKnife", damage: 75)
     let bamboo = Weapon(name: "bamboo", damage: 30)

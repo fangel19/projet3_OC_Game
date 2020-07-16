@@ -8,7 +8,7 @@
 
 import Foundation
 
-//Create the Drug Class, with - 20 pts of damage
+// Creation of the Drug Class, with - 50 pts of damage
 
 class Drug: Weapon {
     

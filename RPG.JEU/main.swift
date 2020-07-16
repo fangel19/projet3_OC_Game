@@ -12,7 +12,5 @@ let fgfGame = Game()
 
 fgfGame.intro()
 
-//fgfGame.teamName()
 fgfGame.askNameOfCharacter()
 fgfGame.selectCharacter()
-//fgfGame.chooseActionToDo()

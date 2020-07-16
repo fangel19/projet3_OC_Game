@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Create the Warrior Class
+// Creation of the Warrior Class
 
 class Warrior: Character {
     

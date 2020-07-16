@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Create the Magician Class
+// Creation of the Magician Class
 
 class Magician: Character {
     

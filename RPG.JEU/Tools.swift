@@ -18,6 +18,8 @@ class Tools {
         numberRound += 1
     }
     
+    // allows to check that the function will return a "string" or "int"
+    
     func getInputString() -> String {
         let str = readLine()
         
